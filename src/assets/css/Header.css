@@ -1,0 +1,87 @@
+header {
+	background-color: #202020;
+}
+
+.containerHeader {
+	border-bottom: 1px solid #393939;
+}
+
+.container1 {
+	width: 1200px;
+	height: 51px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 0 auto;
+}
+.container1 img {
+	height: 51px;
+}
+
+.buttonSignIn {
+	border-left: 1px solid #393939;
+	border-right: 1px solid #393939;
+	padding: 0px 25px;
+	display: flex;
+	align-items: center;
+}
+.buttonSignIn button {
+	height: 51px;
+	background-color: #202020;
+	color: white;
+	font-family: "Roboto Condensed", sans-serif;
+	font-size: 12px;
+	font-weight: 700;
+	border: none;
+}
+
+.searchBar {
+	border-left: 1px solid #393939;
+	border-right: 1px solid #393939;
+	height: 51px;
+	display: flex;
+	align-items: center;
+	padding: 0px 25px;
+}
+
+.searchBarText {
+	outline: none;
+	border: none;
+	height: 20px;
+	font-size: 15px;
+	background-color: #202020;
+	border-bottom: 1px solid grey;
+	color: white;
+	font-family: "Roboto Condensed", sans-serif;
+}
+
+.searchBarText::placeholder {
+	color: rgb(154, 150, 150);
+}
+
+.container2 {
+	height: 40px;
+	display: flex;
+	justify-content: center;
+	background-color: #202020;
+	margin-right: 70px;
+}
+
+.buttonNav {
+	margin: 0 5px;
+	font-size: 12px;
+	font-family: "Roboto Condensed", sans-serif;
+	color: white;
+	background-color: #202020;
+	font-weight: 700;
+	padding: 0px 18px;
+	border: none;
+}
+
+.buttonNav:hover {
+	border-bottom: #ec1d24 2px solid;
+}
+
+button:hover {
+	cursor: pointer;
+}
