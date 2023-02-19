@@ -4,12 +4,16 @@ import axios from "axios";
 import "../assets/css/Comics.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import Modal from "../components/Modal";
 
-const Comics = () => {
+const Comics = ({ favComics, setFavComics }) => {
 	const [comics, setComics] = useState();
 	const [search, setSearch] = useState("");
+	const [comic, setComic] = useState();
 	const [isLoading, setIsLoading] = useState(false);
 	const [skip, setSkip] = useState(0);
+	const [visible, setVisible] = useState(false);
+
 	useEffect(() => {
 		const fetchData = async () => {
 			const response = await axios.get(
@@ -49,23 +53,35 @@ const Comics = () => {
 	}, [search]);
 
 	return isLoading ? (
-		<p>loading...</p>
+		<p> loading... </p>
 	) : (
-		<div style={{ marginTop: "10px" }}>
+		<div
+			style={{
+				marginTop: "10px",
+			}}
+		>
 			<section className="sectionButton">
 				<div className="searchBarPage">
-					<div style={{ marginRight: 20 }}>
+					<div
+						style={{
+							marginRight: 20,
+						}}
+					>
 						<FontAwesomeIcon color="white" icon={faSearch} />
 					</div>
 					<div>
 						<input
 							placeholder="Search..."
-							className="searchBarText"
+							className="searchBarPageText"
+							value={search}
 							type="text"
+							onChange={(event) => {
+								setSearch(event.target.value);
+							}}
 						/>
 					</div>
 				</div>
-				<div className="containerButton">
+				<div className="containerPageButton">
 					{skip > 0 && (
 						<button
 							onClick={() => {
@@ -83,34 +99,33 @@ const Comics = () => {
 						Page suivante
 					</button>
 				</div>
-				<div className="searchBarPage">
-					<div style={{ marginRight: 20 }}>
-						<FontAwesomeIcon color="white" icon={faSearch} />
-					</div>
-					<div>
-						<input
-							placeholder="Search..."
-							className="searchBarPageText"
-							value={search}
-							type="text"
-							onChange={(event) => {
-								setSearch(event.target.value);
-							}}
-						/>
-					</div>
-				</div>
 			</section>
+			<Modal
+				visible={visible}
+				comic={comic}
+				setVisible={setVisible}
+				favComics={favComics}
+				setFavComics={setFavComics}
+			/>
 			<section className="comicsPages">
 				{comics &&
-					comics.results.map((comic) => {
-						const url = `${comic.thumbnail.path}/portrait_uncanny.${comic.thumbnail.extension}`;
-						return (
-							<div key={comic._id}>
-								<img src={url} alt="" />
-								<p>{comic.title}</p>
-							</div>
-						);
-					})}
+					comics.results
+						.sort((a, b) => a - b)
+						.map((comic) => {
+							const url = `${comic.thumbnail.path}/portrait_uncanny.${comic.thumbnail.extension}`;
+							return (
+								<div
+									key={comic._id}
+									onClick={() => {
+										setComic(comic);
+										setVisible(!visible);
+									}}
+								>
+									<img src={url} alt="" />
+									<p> {comic.title} </p>
+								</div>
+							);
+						})}
 			</section>
 		</div>
 	);

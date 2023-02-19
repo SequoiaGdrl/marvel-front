@@ -8,10 +8,18 @@ import { useState, useEffect } from "react";
 import Comics from "./Pages/Comics";
 import Home from "./Pages/Home";
 import Characters from "./Pages/Characters";
-
+import Character from "./Pages/Character";
+import Favorites from "./Pages/Favorites";
 function App() {
 	const [comics, setComics] = useState();
 	const [characters, setCharacters] = useState();
+	const [favComics, setFavComics] = useState(
+		JSON.parse(localStorage.getItem("favComics")) || []
+	);
+	const [favCharacters, setFavCharacters] = useState(
+		JSON.parse(localStorage.getItem("favCharacters")) || []
+	);
+
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
@@ -46,12 +54,43 @@ function App() {
 					<Route
 						path="/"
 						element={
-							<Home comics={comics.results} characters={characters.results} />
+							<Home
+								comics={comics.results}
+								characters={characters.results}
+								favComics={favComics}
+								setFavComics={setFavComics}
+							/>
 						}
 					/>
-					<Route path="/comics" element={<Comics />} />
+					<Route
+						path="/comics"
+						element={
+							<Comics favComics={favComics} setFavComics={setFavComics} />
+						}
+					/>
 					<Route path="/characters" element={<Characters />} />
+					<Route
+						path="/character/:characterId"
+						element={
+							<Character
+								favCharacters={favCharacters}
+								setFavCharacters={setFavCharacters}
+							/>
+						}
+					/>
+					<Route
+						path="/favorites"
+						element={
+							<Favorites
+								favComics={favComics}
+								setFavComics={setFavComics}
+								favCharacters={favCharacters}
+								setFavCharacters={setFavCharacters}
+							/>
+						}
+					/>
 				</Routes>
+
 				<Footer />
 			</div>
 		</Router>

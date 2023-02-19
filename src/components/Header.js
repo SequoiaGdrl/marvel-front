@@ -27,15 +27,11 @@ const Header = () => {
 					</div>
 
 					<div className="searchBar">
-						<div style={{ marginRight: 20 }}>
-							<FontAwesomeIcon color="white" icon={faSearch} />
-						</div>
 						<div>
-							<input
-								placeholder="Search..."
-								className="searchBarText"
-								type="text"
-							/>
+							<p style={{ color: "white", fontSize: 15, fontStyle: "italic" }}>
+								Bienvenue sur mon site{" "}
+								<span style={{ fontWeight: "800" }}>Avengers!</span>
+							</p>
 						</div>
 					</div>
 				</div>
@@ -58,12 +54,14 @@ const Header = () => {
 					>
 						CHARACTERS
 					</button>
-					<button className="buttonNav">FAVORITES</button>
-					<button className="buttonNav">NEWS</button>
-					<button className="buttonNav">TV SHOWS</button>
-					<button className="buttonNav">GAMES</button>
-					<button className="buttonNav">VIDEOS</button>
-					<button className="buttonNav">MORE</button>
+					<button
+						className="buttonNav"
+						onClick={() => {
+							navigate("/favorites");
+						}}
+					>
+						FAVORITES
+					</button>
 				</div>
 			</section>
 			<div></div>

@@ -75,3 +75,15 @@
 	border: none;
 	background-color: #393939;
 }
+
+.separatorLast {
+	width: 100%;
+	height: 1px;
+	border: none;
+	background-color: #393939;
+}
+
+.textBouton {
+	color: white;
+	font-style: italic;
+}

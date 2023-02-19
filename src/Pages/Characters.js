@@ -1,10 +1,12 @@
 import "../assets/css/Characters.css";
 import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
-const Characters = () => {
+const Characters = ({ favorites, setFavorites }) => {
+	const navigate = useNavigate();
 	const [characters, setCharacters] = useState();
 	const [isLoading, setIsLoading] = useState(true);
 	const [skip, setSkip] = useState(0);
@@ -46,7 +48,6 @@ const Characters = () => {
 				`https://site--marvel-back--rmyq52z9hjqg.code.run/characters?name=${search}`
 			);
 			setCharacters(response.data);
-			console.log("gjfgj");
 		};
 		fetchData();
 	}, [search]);
@@ -63,12 +64,16 @@ const Characters = () => {
 					<div>
 						<input
 							placeholder="Search..."
-							className="searchBarText"
+							className="searchBarPageText"
 							type="text"
+							value={search}
+							onChange={(event) => {
+								setSearch(event.target.value);
+							}}
 						/>
 					</div>
 				</div>
-				<div className="containerButton">
+				<div className="containerPageButton">
 					{skip > 0 && (
 						<button
 							onClick={() => {
@@ -88,29 +93,18 @@ const Characters = () => {
 						</button>
 					)}
 				</div>
-				<div className="searchBarPage">
-					<div style={{ marginRight: 20 }}>
-						<FontAwesomeIcon color="white" icon={faSearch} />
-					</div>
-					<div>
-						<input
-							placeholder="Search..."
-							className="searchBarPageText"
-							type="text"
-							value={search}
-							onChange={(event) => {
-								setSearch(event.target.value);
-							}}
-						/>
-					</div>
-				</div>
 			</section>
 			<section className="comicsPages">
 				{characters &&
 					characters.results.map((character) => {
 						const url = `${character.thumbnail.path}/portrait_uncanny.${character.thumbnail.extension}`;
 						return (
-							<div key={character._id}>
+							<div
+								key={character._id}
+								onClick={() => {
+									navigate(`/character/${character._id}`);
+								}}
+							>
 								<img src={url} alt="" />
 								<p>{character.name}</p>
 							</div>

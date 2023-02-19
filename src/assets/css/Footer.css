@@ -1,0 +1,19 @@
+footer {
+	width: 100%;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+}
+.imgSignature {
+	width: 100px;
+	height: 100px;
+}
+
+.signature {
+	display: flex;
+	justify-content: center;
+	color: white;
+	padding: 100px 0;
+}
